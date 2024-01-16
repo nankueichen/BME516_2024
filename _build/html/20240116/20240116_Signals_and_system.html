@@ -1,0 +1,791 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <title>Signals and Systems &#8212; BME 516</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=bd9e20870c6007c4c509" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=bd9e20870c6007c4c509" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=bd9e20870c6007c4c509" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.5.1/css/all.min.css?digest=bd9e20870c6007c4c509" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.1/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.1/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.1/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=bd9e20870c6007c4c509" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=bd9e20870c6007c4c509" />
+  <script src="../_static/vendor/fontawesome/6.5.1/js/all.min.js?digest=bd9e20870c6007c4c509"></script>
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '20240116/20240116_Signals_and_system';</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="prev" title="Jupyter Book for BME 516" href="../intro.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a id="pst-skip-link" class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>
+    Back to top
+  </button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <header>
+  
+    <div class="bd-header navbar navbar-expand-lg bd-navbar">
+    </div>
+  
+  </header>
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+        
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+
+<a class="navbar-brand logo" href="../intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/muse.png" class="logo__image only-light" alt="BME 516 - Home"/>
+    <script>document.write(`<img src="../_static/muse.png" class="logo__image only-dark" alt="BME 516 - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../intro.html">
+                    Jupyter Book for BME 516
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Signals and Systems</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/executablebooks/jupyter-book" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2F20240116/20240116_Signals_and_system.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/20240116/20240116_Signals_and_system.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Signals and Systems</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#first-we-will-explain-the-basic-concept-of-signals-and-system">First, we will explain the basic concept of signals and system</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#second-we-will-discuss-mathematical-presentation-of-signals-and-system">Second, we will discuss mathematical presentation of signals and system</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#third-you-could-find-more-material-here">Third, you could find more material here:</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <p><code class="docutils literal notranslate"><span class="pre">2024-01-16</span></code></p>
+<section class="tex2jax_ignore mathjax_ignore" id="signals-and-systems">
+<h1>Signals and Systems<a class="headerlink" href="#signals-and-systems" title="Permalink to this heading">#</a></h1>
+<section id="first-we-will-explain-the-basic-concept-of-signals-and-system">
+<h2>First, we will explain the basic concept of signals and system<a class="headerlink" href="#first-we-will-explain-the-basic-concept-of-signals-and-system" title="Permalink to this heading">#</a></h2>
+<hr class="docutils" />
+<ul class="simple">
+<li><p>What is an object?</p></li>
+<li><p>What are signals?</p></li>
+<li><p>What does “continuous” mean?
+<img alt="1" src="../_images/1.png" /></p></li>
+</ul>
+<hr class="docutils" />
+<ul class="simple">
+<li><p>What is a <strong>system</strong>?
+<img alt="1" src="../_images/glasses.jpeg" /></p></li>
+</ul>
+<hr class="docutils" />
+<ul class="simple">
+<li><p>What is a “response”?</p></li>
+<li><p>What is a “measurement”?
+<img alt="1" src="../_images/2.png" /></p></li>
+<li><p>Are the “responses” some type of “signals”?</p></li>
+<li><p>Are the “responses” continuous?</p></li>
+</ul>
+<hr class="docutils" />
+<ul class="simple">
+<li><p>What is “shift-invariant”? </br>
+<img alt="1" src="../_images/3.png" /></p></li>
+</ul>
+<hr class="docutils" />
+<ul class="simple">
+<li><p>What does “spread” mean in signal processing? </br>
+<img alt="1" src="../_images/5.png" /></p></li>
+</ul>
+<hr class="docutils" />
+<ul class="simple">
+<li><p>What is “point impulse”?</p></li>
+<li><p>What is a “point spread function” (PSF)?</p></li>
+<li><p>What is <span class="math notranslate nohighlight">\(\delta(x,y)\)</span>
+<img alt="1" src="../_images/7.png" /></p></li>
+</ul>
+<hr class="docutils" />
+<ul class="simple">
+<li><p>What is a “linear shift-invariant” (LSI) system?</p></li>
+<li><p>What is “convolution” in signal processing?</p></li>
+</ul>
+<p><img alt="1" src="../_images/6.png" /></p>
+<hr class="docutils" />
+<ul class="simple">
+<li><p>What are “continuous” and “discrete” signals?</p></li>
+</ul>
+<p><img alt="1" src="../_images/scale3.png" /></p>
+<hr class="docutils" />
+<ul class="simple">
+<li><p>Are these continuous or discrete signals?</p></li>
+<li><p>What is “sampling”?
+<img alt="1" src="../_images/scale1.png" /></p></li>
+</ul>
+<hr class="docutils" />
+<ul class="simple">
+<li><p>Further discussion of sampling</p></li>
+</ul>
+<p><img alt="1" src="../_images/sampling2.gif" /></p>
+<hr class="docutils" />
+<ul class="simple">
+<li><p>Further discussion of sampling: Spatial resolution and dynamic range of images</p></li>
+</ul>
+<p><img alt="1" src="../_images/resolution_dynamicrange.png" /></p>
+<p><img alt="1" src="../_images/dynamicRange.jpg" /></p>
+<ul class="simple">
+<li><p>Further discussion of sampling: Nyquist frequency of sampling</p>
+<ul>
+<li><p><a class="reference external" href="https://www.youtube.com/watch?v=TX4U9QRbviA">Floaty bird</a></p></li>
+<li><p><a class="reference external" href="https://www.youtube.com/watch?v=yr3ngmRuGUc">Floaty helicopter</a></p></li>
+</ul>
+</li>
+</ul>
+<p><img alt="1" src="../_images/sampling_ex_image.png" /></p>
+</section>
+<section id="second-we-will-discuss-mathematical-presentation-of-signals-and-system">
+<h2>Second, we will discuss mathematical presentation of signals and system<a class="headerlink" href="#second-we-will-discuss-mathematical-presentation-of-signals-and-system" title="Permalink to this heading">#</a></h2>
+<hr class="docutils" />
+<p>Continuous signal (2D):
+<span class="math notranslate nohighlight">\(f(x,y), \; -\infty \leq x,y \leq \infty \)</span></p>
+<hr class="docutils" />
+<p>Continuous signal (1D):
+<span class="math notranslate nohighlight">\(f(x), \; -\infty \leq x \leq \infty \)</span></p>
+<hr class="docutils" />
+<p><strong>Delta function</strong>: one-dimensional form</p>
+<p><span class="math notranslate nohighlight">\(\delta(x) = 0, \; x \neq 0 \)</span></p>
+<p><span class="math notranslate nohighlight">\(\int_{-\infty}^\infty f(x) \delta(x) dx = f(0) \)</span></p>
+<hr class="docutils" />
+<p><img alt="1" src="../_images/Dirac_distribution_PDF.svg" /></p>
+<p><img alt="1" src="../_images/Dirac_function_approximation.gif" /></p>
+<p>light detection; shutter speed; exposure time </br></p>
+<p>light detection; pinhole size </br></p>
+<hr class="docutils" />
+<p><strong>Delta function</strong>: two-dimensional form
+<span class="math notranslate nohighlight">\(\delta(x,y) = 0, \; (x,y) \neq (0,0) \)</span></p>
+<p><span class="math notranslate nohighlight">\(\int_{-\infty}^\infty \int_{-\infty}^\infty f(x,y) \delta(x,y) dx\,dy= f(0,0) \)</span></p>
+<hr class="docutils" />
+<p>Sifting property
+<span class="math notranslate nohighlight">\(\delta(x-x_0,y-y_0) = 0, (x,y) \neq (x_0,y_0) \)</span></p>
+<p><span class="math notranslate nohighlight">\(\int_{-\infty}^\infty \int_{-\infty}^\infty f(x,y) \delta(x-x_0,y-y_0) dx\,dy= f(x_0,y_0) \)</span></p>
+<hr class="docutils" />
+<p>Scaling property
+<span class="math notranslate nohighlight">\(
+\begin{align*}
+&amp; \int_{-\infty}^\infty \int_{-\infty}^\infty f(x,y) \delta(ax,by) dx\,dy \\
+&amp; =\frac{1}{ab} \int_{-\infty}^\infty \int_{-\infty}^\infty f(\frac{x}{a},\frac{y}{b}) \delta(x,y) dx\,dy \\
+&amp; = \frac{1}{ab}f(0,0) \\
+&amp; = \frac{1}{ab} \int_{-\infty}^\infty \int_{-\infty}^\infty f(x,y) \delta(x,y) dx\,dy \\
+&amp; = \int_{-\infty}^\infty \int_{-\infty}^\infty f(x,y) \frac{\delta(x,y)}{ab} dx\,dy
+\end{align*}
+\)</span></p>
+<p>Therefore,</p>
+<p><span class="math notranslate nohighlight">\(\delta(ax,by) = \frac{\delta(x,y)}{ab} \)</span></p>
+<hr class="docutils" />
+<p><span class="math notranslate nohighlight">\(\delta(x,y)\)</span> is an even function: When <span class="math notranslate nohighlight">\(a=-1,\,b=-1\)</span>, we have <span class="math notranslate nohighlight">\(\delta(-x,-y) = \delta(x,y)\)</span></p>
+<hr class="docutils" />
+<p>Comb function</p>
+<p><span class="math notranslate nohighlight">\(\mathrm{comb}(x,y) = \sum_{m = -\infty}^{\infty} \sum_{n = -\infty}^{\infty} \delta(x-m,y-n)\)</span></p>
+<p>with m and n being integers</p>
+<p>Comb and sampling function</p>
+<p><span class="math notranslate nohighlight">\( \delta_s(x,y;\Delta x, \Delta y) = \sum_{m=-\infty}^{\infty} \sum_{n=-\infty}^{\infty} \delta(x-m\Delta x,y-n \Delta y)  \)</span></p>
+<p><img alt="1" src="../_images/Dirac_comb.svg.png" /></p>
+<p><strong>Exercise</strong> </br>
+show that</p>
+<p><span class="math notranslate nohighlight">\( \delta_s(x,y; \Delta x, \Delta y) = \frac{1}{\Delta x \Delta y} \mathrm{comb} (\frac{x}{\Delta x}, \frac{y}{\Delta y})  \)</span></p>
+<hr class="docutils" />
+<p>Rect function</p>
+<p><span class="math notranslate nohighlight">\( \mathrm{rect}(x,y)= \left\{%
+\begin{array}%
+1, &amp; \textrm{for } |x| \lt \frac{1}{2} \textrm{ and } |y| \lt \frac{1}{2}\\
+0, &amp; \textrm{for } |x| \gt \frac{1}{2} \textrm{ or } |y| \gt \frac{1}{2}
+\end{array}%
+\right. %
+\)</span></p>
+<p><img alt="1" src="../_images/Rectangular_function.svg" /></p>
+<p><strong>Exercise</strong></p>
+<p>Show that we can use the product</p>
+<p><span class="math notranslate nohighlight">\( f(x,y)\, \mathrm{rect}(\frac{x-x_0}{X},\frac{y-y_0}{Y}) \)</span></p>
+<p>to select that part of signal <span class="math notranslate nohighlight">\(f(x,y)\)</span> centered at a point <span class="math notranslate nohighlight">\(f(x_0,y_0)\)</span> of the plane with width <span class="math notranslate nohighlight">\(X\)</span> and height <span class="math notranslate nohighlight">\(Y\)</span>, and set the rest to zero.</p>
+<hr class="docutils" />
+<p>Sinc function (1-dimensional form)</p>
+<p><span class="math notranslate nohighlight">\( \mathrm{sinc}(x)= \left\{%
+\begin{array}%
+1, &amp; x=0 \\
+\frac{\sin (\pi x)}{\pi x}, &amp; \textrm{otherwise} 
+\end{array}%
+\right. %
+\)</span></p>
+<p>Sinc function (2-dimensional form)
+<span class="math notranslate nohighlight">\( \mathrm{sinc}(x,y)= \left\{%
+\begin{array}%
+1, &amp; x=0 \textrm{ and } y=0\\
+\frac{\sin (\pi x) \sin (\pi y)}{\pi x y}, &amp; \textrm{otherwise} 
+\end{array}%
+\right. %
+\)</span></p>
+<p>Note that
+<span class="math notranslate nohighlight">\( \mathrm{sinc}(x,y) = \mathrm{sinc}(x) \, \mathrm{sinc}(y)\)</span></p>
+<p><img alt="rect and sinc function" src="../_images/rect_sinc.png" /></p>
+<p><strong>Homework</strong>: plot sinc waveform with python or matlab or any other computer program.</p>
+<p><strong>Exercise</strong>: Modify the code below to extend the range of x, and see how the sinc waveform changes</p>
+<p><a class="reference external" href="https://colab.research.google.com/drive/1sZ3Hw3G68TLKi-AQ0VWFqLwBfXbmsLIR?usp=sharing">jupyter notebook</a></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Here we visualize sinc function for a given range of x</span>
+
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span> 
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span> 
+
+<span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="o">-</span><span class="mi">5</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mf">0.001</span><span class="p">)</span> 
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;x = </span><span class="si">{</span><span class="n">x</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span> <span class="n">x</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">*</span><span class="n">x</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;y = </span><span class="si">{</span><span class="n">y</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;sinc waveform&quot;</span><span class="p">)</span> 
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;x&quot;</span><span class="p">)</span> 
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;sinc(x)&quot;</span><span class="p">)</span> 
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">)</span> 
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>x = [-5.    -4.999 -4.998 ...  4.997  4.998  4.999]
+y = [3.89817183e-17 2.00039679e-04 4.00157431e-04 ... 6.00351328e-04
+ 4.00157430e-04 2.00039678e-04]
+</pre></div>
+</div>
+<p><img alt="png" src="../_images/sinc_plot.png" /></p>
+<p><strong>System</strong>: input and output</p>
+<p>A continous-to-continous system: input-output equation of system
+<span class="math notranslate nohighlight">\( g(x,y) = S [f(x,y)] \)</span></p>
+<hr class="docutils" />
+<p>A linear system</p>
+<p><span class="math notranslate nohighlight">\( S\Bigg[\sum_{k=1}^K \omega_k f_k(x,y)] \Bigg] = \sum_{k=1}^K \omega_k S[f_k(x,y)] \)</span></p>
+<hr class="docutils" />
+<p>Impulse response function or point-spread function (PSF)</p>
+<p><span class="math notranslate nohighlight">\( h(x,y;x_0,y_0) = S[\delta(x-x_0,y-y_0)] \)</span></p>
+<hr class="docutils" />
+<p>Superposition integral</p>
+<p><span class="math notranslate nohighlight">\( g(x,y) = \int_{-\infty}^\infty \int_{-\infty}^\infty f(x_0,y_0) h(x,y;x_0,y_0)\, dx_0 \, dy_0\)</span></p>
+<hr class="docutils" />
+<p>Shift invariance</p>
+<p><span class="math notranslate nohighlight">\(
+\begin{align*}
+ &amp; g(x,y) = S[f(x,y)] \\
+&amp; g(x-x_0,y-y_0) = S[f(x-x_0,y-y_0)]
+\end{align*}
+\)</span></p>
+<hr class="docutils" />
+<p>Linear shift-invariant (LSI): convolution integral</p>
+<p><span class="math notranslate nohighlight">\( g(x,y) = \int_{-\infty}^\infty \int_{-\infty}^\infty f(x_0,y_0) h(x-x_0,y-y_0)\, dx_0 \, dy_0 \)</span></p>
+<p>where
+<span class="math notranslate nohighlight">\( h(x,y) = S[\delta(x,y)]\)</span> and <span class="math notranslate nohighlight">\(S[\delta(x-x_0,y-y_0)] = h(x-x_0,y-y_0)\)</span></p>
+<p><strong>Discussion</strong>:
+What is the difference between <span class="math notranslate nohighlight">\(h(x,y;x_0,y_0)\)</span> and <span class="math notranslate nohighlight">\(h(x-x_0,y-y_0)\)</span></p>
+<hr class="docutils" />
+<p>Linear shift-invariant (LSI): convolution equation</p>
+<p><span class="math notranslate nohighlight">\( g(x,y) = h(x,y) * f(x,y) \)</span></p>
+<hr class="docutils" />
+<p><strong>Exercise</strong>
+(see example 2.2 of Prince and Links)
+Consider a continuous system with input-output equation
+<span class="math notranslate nohighlight">\( g(x,y) = \frac{f(x,y)}{3} \)</span></p>
+<p><em>Question</em>: Is this system linear and shift-invariant?</p>
+<p><em>Solution</em>:
+If <span class="math notranslate nohighlight">\(g'(x,y)\)</span> is the response of the system to input <span class="math notranslate nohighlight">\(\sum_{k=1}^K w_k f_k(x,y)\)</span>, then</p>
+<p><span class="math notranslate nohighlight">\(
+\begin{align*}
+g'(x,y) &amp; = \frac{\sum_{k=1}^K w_k f_k(x,y)}{3} \\
+&amp; = \sum_{k=1}^K w_k \frac{f_k(x,y)}{3}  \\
+&amp; = \sum_{k=1}^K w_k g_k(x,y)
+\end{align*}
+\)</span></p>
+<p>Therefore, the system is linear. </br>
+If <span class="math notranslate nohighlight">\(g'(x,y)\)</span> is the response of the system to input <span class="math notranslate nohighlight">\(f(x-x_0,y-y_o)\)</span>, then
+$<span class="math notranslate nohighlight">\( g'(x,y) = \frac{f(x-x_0,y-y_0)}{3} = g(x-x_0,y-y_0)\)</span>$
+Therefore, the system is shift-invariant.</p>
+<hr class="docutils" />
+<p><strong>Homework</strong>:
+Consider a continous system with input-output equation <span class="math notranslate nohighlight">\(g(x,y) = sin(x)f(x,y)\)</span>. Is this system linear and shift-invariant?</p>
+<hr class="docutils" />
+<p><em>Explaining example 2.2 of Prince and Links</em>:</p>
+<p><strong>Discussion of linearity</strong></p>
+<p>It would be easier that we have two 1D input function <span class="math notranslate nohighlight">\(f_1(x)\)</span> and <span class="math notranslate nohighlight">\(f_2(x)\)</span>. According to the definition the response to each of those two 1D input waveforms will be</p>
+<p><span class="math notranslate nohighlight">\(
+g_1(x) = S(f_1(x)) = \frac{f_1(x)}{3}
+\)</span></p>
+<p>and</p>
+<p><span class="math notranslate nohighlight">\(
+g_2(x) = S(f_2(x)) = \frac{f_2(x)}{3}
+\)</span></p>
+<p>Now, assuming we have a new input waveform <span class="math notranslate nohighlight">\(2f_1(x) + 4f_2(x)\)</span>, then its output function would be</p>
+<p><span class="math notranslate nohighlight">\(
+S(2f_1(x)+4f_2(x)) = \frac{2f_1(x)+4f_2(x)}{3}
+\)</span></p>
+<p>which could be further represented as <span class="math notranslate nohighlight">\(2g_1(x)+4g_2(x)\)</span>.</p>
+<p>Note the response of the new input waveform (<span class="math notranslate nohighlight">\(2g_1(x)+4g_2(x)\)</span>) has exactly the same linear combination pattern of the input <span class="math notranslate nohighlight">\(2f_1(x) + 4f_2(x)\)</span>. Therefore we know the system is linear.</p>
+<p><strong>Discussion of shift-invariant</strong></p>
+<p>First. if <span class="math notranslate nohighlight">\(g'(x,y)\)</span> is the response of the system to input <span class="math notranslate nohighlight">\(f(x-7,y-9)\)</span>, then according to the definition we know</p>
+<p><span class="math notranslate nohighlight">\(
+g'(x,y) = \frac{f(x-7,y-9)}{3}
+\)</span></p>
+<p>Second, by applying change of variable (i.e., replacing <span class="math notranslate nohighlight">\(x\)</span> with <span class="math notranslate nohighlight">\(x-7\)</span>; and replacing <span class="math notranslate nohighlight">\(y\)</span> with <span class="math notranslate nohighlight">\(y-9\)</span>) to the original definition (<span class="math notranslate nohighlight">\(g(x,y)=\frac{f(x,y)}{3}\)</span>), we have</p>
+<p><span class="math notranslate nohighlight">\(
+g(x-7,y-9) = \frac{f(x-7,y-9)}{3}
+\)</span></p>
+<p>From the above two arguments, we now know that</p>
+<p><span class="math notranslate nohighlight">\(
+g'(x,y) = g(x-7,y-9)
+\)</span></p>
+<p>meaning that we are able to predict the response waveform of a shifted-waveform by simply shifting the known response. Therefore the system is shift invariant.</p>
+</section>
+<section id="third-you-could-find-more-material-here">
+<h2>Third, you could find more material here:<a class="headerlink" href="#third-you-could-find-more-material-here" title="Permalink to this heading">#</a></h2>
+<p>The first five videos of <a class="reference external" href="https://www.youtube.com/playlist?list=PLuh62Q4Sv7BUSzx5Jr8Wrxxn-U10qG1et">https://www.youtube.com/playlist?list=PLuh62Q4Sv7BUSzx5Jr8Wrxxn-U10qG1et</a></p>
+<hr class="docutils" />
+<p>Slides from other professors:
+<a class="reference external" href="http://courses.washington.edu/phys428/lecture%20slides/Lecture02.1.pdf">http://courses.washington.edu/phys428/lecture%20slides/Lecture02.1.pdf</a> (which is part of Dr. Kinahan’s course: <a class="reference external" href="http://courses.washington.edu/phys428/">http://courses.washington.edu/phys428/</a> )</p>
+<hr class="docutils" />
+<p>book chapters:
+<a href = "digital_signals_book/1.pdf"> chapter 1 </a>
+<a href = "digital_signals_book/2.pdf"> chapter 2 </a>
+<a href = "digital_signals_book/3.pdf"> chapter 3 </a></p>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./20240116"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="../intro.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Jupyter Book for BME 516</p>
+      </div>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#first-we-will-explain-the-basic-concept-of-signals-and-system">First, we will explain the basic concept of signals and system</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#second-we-will-discuss-mathematical-presentation-of-signals-and-system">Second, we will discuss mathematical presentation of signals and system</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#third-you-could-find-more-material-here">Third, you could find more material here:</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Nan-kuei Chen
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2022.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=bd9e20870c6007c4c509"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=bd9e20870c6007c4c509"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
